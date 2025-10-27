@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Perfect Home</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #f0f2f5;
+      background-image: url('home.png');
+      background-size: cover;
+      background-position: center;
+      color: #333;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 32px;
+      font-family: 'Brush Script MT', cursive;
+    }
+
+    .selection {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #property-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .property-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .property-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .property-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 2px solid #003366;
+    }
+
+    .property-card h3 {
+      margin: 15px 0;
+      font-size: 24px;
+      color: #003366;
+    }
+
+    .property-card p {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .property-card button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .property-card button:hover {
+      background: #00509e;
+    }
+  </style>
+</head>
+<body>
+
+<header>Your Perfect Home</header>
+
+<div class="selection">
+  <label for="type">Select Property Type:</label>
+  <select id="type" onchange="showProperties(this.value)">
+    <option value="">--Choose Type--</option>
+    <option value="villa">Villa</option>
+    <option value="rentedHouse">Rented House</option>
+    <option value="apartment">Apartment</option>
+    <option value="land">Land</option>
+    <option value="building">Building</option>
+    <option value="airbnb">Airbnb</option>
+  </select>
+</div>
+
+<div id="property-container">
+  <!-- Properties will appear here -->
+</div>
+
+<script>
+  const properties = {
+    villa: [
+      { id: 1, name: "Luxury Beach Villa", price: 120, description: "5-bedroom villa with ocean view", imageurl: "https://images.pexels.com/photos/123123/pexels-photo-123123.jpeg" },
+      { id: 2, name: "Mountain Retreat Villa", price: 150, description: "4-bedroom villa with private pool", imageurl: "https://images.pexels.com/photos/456456/pexels-photo-456456.jpeg" },
+      // Add more villa properties here
+    ],
+    rentedHouse: [
+      { id: 1, name: "Cozy Suburban House", price: 35, description: "3-bedroom house in quiet neighborhood", imageurl: "https://images.pexels.com/photos/789789/pexels-photo-789789.jpeg" },
+      { id: 2, name: "Modern City House", price: 45, description: "2-bedroom house near downtown", imageurl: "https://images.pexels.com/photos/101112/pexels-photo-101112.jpeg" },
+      // Add more rented house properties here
+    ],
+    apartment: [
+      { id: 1, name: "Downtown Studio Apartment", price: 25, description: "Studio apartment with city view", imageurl: "https://images.pexels.com/photos/131415/pexels-photo-131415.jpeg" },
+      { id: 2, name: "Spacious 2BHK Apartment", price: 40, description: "2-bedroom apartment with balcony", imageurl: "https://images.pexels.com/photos/161718/pexels-photo-161718.jpeg" },
+      // Add more apartment properties here
+    ],
+    land: [
+      { id: 1, name: "Countryside Plot", price: 20, description: "5-acre land ideal for farming", imageurl: "https://images.pexels.com/photos/192021/pexels-photo-192021.jpeg" },
+      { id: 2, name: "Urban Development Land", price: 60, description: "3-acre land near city center", imageurl: "https://images.pexels.com/photos/222324/pexels-photo-222324.jpeg" },
+      // Add more land properties here
+    ],
+    building: [
+      { id: 1, name: "Commercial Office Building", price: 200, description: "10-story building with modern amenities", imageurl: "https://images.pexels.com/photos/252627/pexels-photo-252627.jpeg" },
+      { id: 2, name: "Residential Complex", price: 180, description: "5-building complex with 50 units", imageurl: "https://images.pexels.com/photos/282930/pexels-photo-282930.jpeg" },
+      // Add more building properties here
+    ],
+    airbnb: [
+      { id: 1, name: "Urban Loft", price: 60, description: "1-bedroom loft in the heart of the city", imageurl: "https://images.pexels.com/photos/313233/pexels-photo-313233.jpeg" },
+      { id: 2, name: "Beachfront Cottage", price: 80, description: "2-bedroom cottage with sea view", imageurl: "https://images.pexels.com/photos/343536/pexels-photo-343536.jpeg" },
+      // Add more Airbnb properties here
+    ]
+  };
+
+  function showProperties(type) {
+    const container = document.getElementById('property-container');
+    container.innerHTML = "";
+    if (!type) return;
+    properties[type].forEach(prop => {
+      container.innerHTML += `
+        <div class="property-card">
+          <img src="${prop.imageurl}" alt="${prop.name}" />
+          <h3>${prop.name}</h3>
+          <p>Price: ₹${prop.price}L</p>
+          <p>${prop.description}</p>
+          <button onclick="moreDetails(${prop.id}, '${type}')">More Details</button>
+        </div>
+      `;
+    });
+  }
+
+  function moreDetails(id, type) {
+    const prop = properties[type].find(p => p.id === id);
+    alert(`Name: ${prop.name}\nPrice: ₹${prop.price}L\nDescription: ${prop.description}`);
+  }
+</script>
+
+</body>
+</html>

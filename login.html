@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - EstateVision</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('home.png') no-repeat center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+}
+
+.login-container {
+    background: rgba(255,255,255,0.1);
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 360px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.login-container h2 {
+    margin-bottom: 25px;
+    color: #F2C94C;
+    font-size: 2rem;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 14px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.login-container .btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    background-color: #F2C94C;
+    color: #2E3A59;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.login-container .btn:hover {
+    background-color: #d1a918;
+}
+
+.login-container p {
+    margin-top: 18px;
+    font-size: 0.9rem;
+}
+
+.login-container a {
+    color: #F2C94C;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form onsubmit="redirect(); return false;">
+            <input type="text" placeholder="Username" required><br>
+            <input type="password" placeholder="Password" required><br>
+            <button class="btn" type="submit">Login</button>
+        </form>
+        <p>New here? <a href="signup.html">Create an account</a></p>
+    </div>
+
+    <script>
+    function redirect() {
+        // Redirect to property choice page
+        window.location.href = "properties.html";
+    }
+    </script>
+</body>
+</html>

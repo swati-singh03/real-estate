@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EstateVision - Find Your Dream Home</title>
+<style>
+/* General Reset */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+
+/* Header */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding:20px 50px; background: rgba(0,0,0,0.6); color:white;
+    position: fixed; width:100%; top:0; z-index:100;
+}
+header .logo { font-size:1.8rem; font-weight:bold; }
+header nav a {
+    color:white; margin-left:25px; text-decoration:none; font-weight:bold;
+    transition:0.3s;
+}
+header nav a:hover { color:#F2C94C; }
+
+/* Hero Section */
+.hero {
+    height:100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('home.png') no-repeat center/cover;
+    display:flex; justify-content:center; align-items:center;
+    text-align:center; color:white; flex-direction:column; padding:0 20px;
+}
+.hero-content h1 { font-size:3rem; margin-bottom:20px; text-shadow:2px 2px 10px rgba(0,0,0,0.7); }
+.hero-content p { font-size:1.5rem; margin-bottom:30px; text-shadow:1px 1px 8px rgba(0,0,0,0.6); }
+.btn {
+    padding:12px 40px; background-color:#F2C94C; color:#2E3A59;
+    font-weight:bold; border:none; border-radius:5px; cursor:pointer;
+    transition:0.3s; text-decoration:none;
+}
+.btn:hover { background-color:#d1a918; }
+
+/* Features Section */
+.features {
+    display:flex; justify-content:center; flex-wrap:wrap;
+    gap:80px; padding:130px 60px; background:#f9f9f9;
+}
+.feature-card {
+    width:320px; background:white; border-radius:20px;
+    text-align:center; box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    padding-bottom:30px; transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover { transform:translateY(-10px); box-shadow:0 10px 35px rgba(0,0,0,0.25); }
+.feature-card img {
+    width:100%; height:230px; border-radius:20px 20px 0 0; object-fit:cover;
+    transition: transform 0.3s ease;
+}
+.feature-card:hover img { transform:scale(1.03); }
+.feature-card h2 { margin:25px 0 10px; color:#2E3A59; font-size:1.3rem; }
+.feature-card p { color:#555; padding:0 20px; font-size:1rem; }
+
+/* Footer */
+footer { text-align:center; padding:30px; background:#2E3A59; color:white; font-size:1rem; margin-top:60px; }
+
+/* Circle Modals */
+.modal {
+    position: fixed; top:50%; left:50%;
+    transform: translate(-50%, -50%) scale(0);
+    width:350px; height:350px; background:#001f4d; color:white;
+    border-radius:50%; text-align:center;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:40px 20px; box-shadow:0 0 25px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease-in-out; z-index:200; overflow:hidden;
+}
+.modal.show { transform: translate(-50%, -50%) scale(1); }
+.modal h2 { margin-bottom:20px; }
+.modal p { font-size:1rem; line-height:1.5; }
+.modal .close-btn {
+    position:absolute; top:15px; right:15px; width:25px; height:25px;
+    border-radius:50%; background:#F2C94C; color:#2E3A59;
+    border:none; font-weight:bold; cursor:pointer; line-height:25px;
+}
+
+/* Overlay */
+.overlay {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.6); opacity:0; visibility:hidden;
+    transition: opacity 0.3s; z-index:100;
+}
+.overlay.show { opacity:1; visibility:visible; }
+
+</style>
+</head>
+<body>
+<header>
+    <div class="logo">EstateVision</div>
+    <nav>
+        <a href="#" id="aboutBtn">About</a>
+        <a href="#" id="contactBtn">Contact</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Signup</a>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Discover Your Perfect Home</h1>
+        <p>Luxury, comfort, and convenience — all in one place.</p>
+        <a href="login.html" class="btn">Get Started</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="feature-card">
+        <img src="APT.png" alt="Modern Apartment">
+        <h2>Modern Apartments</h2>
+        <p>Experience urban living with top-notch amenities.</p>
+    </div>
+    <div class="feature-card">
+        <img src="VILLA.png" alt="Luxury Villa">
+        <h2>Luxury Villas</h2>
+        <p>Spacious and elegant homes for your dream lifestyle.</p>
+    </div>
+    <div class="feature-card">
+        <img src="aff.png" alt="Affordable Homes">
+        <h2>Affordable Homes</h2>
+        <p>Perfect homes within your budget without compromise.</p>
+    </div>
+</section>
+
+<!-- Circle Modals -->
+<div class="overlay" id="overlay"></div>
+
+<div class="modal" id="aboutModal">
+    <button class="close-btn" id="closeAbout">&times;</button>
+    <h2>About EstateVision</h2>
+    <p>EstateVision helps you find your dream home easily.<br>
+       Browse apartments, villas, and affordable homes.<br>
+       Save favorites, explore amenities, and connect directly with experts.</p>
+</div>
+
+<div class="modal" id="contactModal">
+    <button class="close-btn" id="closeContact">&times;</button>
+    <h2>Contact Us</h2>
+    <p>We’re here to help you find your perfect home!<br>
+       <strong>Email:</strong> realestate@gmail.com<br>
+       <strong>Phone:</strong> 9923382400</p>
+</div>
+
+<script>
+const overlay = document.getElementById('overlay');
+const modals = { about: document.getElementById('aboutModal'), contact: document.getElementById('contactModal') };
+
+document.getElementById('aboutBtn').onclick = () => toggle('about');
+document.getElementById('contactBtn').onclick = () => toggle('contact');
+document.getElementById('closeAbout').onclick = () => toggle('about', false);
+document.getElementById('closeContact').onclick = () => toggle('contact', false);
+overlay.onclick = () => { toggle('about', false); toggle('contact', false); };
+
+function toggle(modal, show=true){
+  modals[modal].classList[show?'add':'remove']('show');
+  overlay.classList[show?'add':'remove']('show');
+}
+</script>
+
+<footer>
+    <p>&copy; 2025 EstateVision. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
